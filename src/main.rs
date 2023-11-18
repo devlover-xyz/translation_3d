@@ -28,6 +28,20 @@ impl Point3D {
         self.z = new_z;
     }
 
+      fn rotate_y(&mut self, angle: f64) {
+        let new_x = self.x * angle.cos() + self.z * angle.sin();
+        let new_z = -self.x * angle.sin() + self.z * angle.cos();
+        self.x = new_x;
+        self.z = new_z;
+    }
+
+    fn rotate_z(&mut self, angle: f64) {
+        let new_x = self.x * angle.cos() - self.y * angle.sin();
+        let new_y = self.x * angle.sin() + self.y * angle.cos();
+        self.x = new_x;
+        self.y = new_y;
+    }
+
     fn reflect_xy_plane(&mut self) {
         self.z = -self.z;
     }
@@ -83,7 +97,7 @@ fn main() {
 
     // Display coordinates after rotation
     println!(
-        "After rotation: x={}, y={}, z={}",
+        "After rotation X: x={}, y={}, z={}",
         point.x, point.y, point.z
     );
 
@@ -94,7 +108,7 @@ fn main() {
         point.x, point.y, point.z
     );
 
-    // Reflect the point across the YZ-plane
+    // // Reflect the point across the YZ-plane
     point.reflect_yz_plane();
     println!(
         "After YZ-plane reflection: x={}, y={}, z={}",
